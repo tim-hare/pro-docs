@@ -1,0 +1,482 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "SharePoint List Items",
+		"description": "API for SharePoint List Items",
+		"version": "1.0.0.0"
+	},
+	"host": "morantug.sharepoint.com",
+	"schemes": ["https"],
+	"paths": {
+		"{SiteUrl}/_api/web/lists/GetByTitle('{ListTitle}')/items": {
+			"post": {
+				"tags": ["Sites"],
+				"description": "Create list item",
+				"operationId": "CreateListItem",
+				"produces": ["application/json"],
+				"consumes": ["application/json;odata=verbose"],
+				"parameters": [{
+						"name": "SiteUrl",
+						"in": "path",
+						"description": "Site specific portion of URL, typically same as Site Title, including managed path",
+						"required": false,
+						"type": "string",
+						"x-example": "Sales"
+					}, {
+						"name": "ListTitle",
+						"in": "path",
+						"description": "List title",
+						"required": true,
+						"type": "string",
+						"x-example": "Documents"
+					}, {
+						"name": "body",
+						"in": "body",
+						"description": "Metadata used to create list item",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CreateListItem"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/CreateListItem"
+						}
+					},
+					"examples": {
+						"application/json": {
+							"odata.metadata": "https://morantug.sharepoint.com/sites/Sales/_api/$metadata#SP.ListData.Shared_x0020_DocumentsItems/@Element\u0026$select=Id,Title,FileRef,Author/Title,Created,Editor/Title,Modified,LinkFilename,FileSystemObjectType,ContentTypeId",
+							"odata.type": "SP.Data.Shared_x0020_DocumentsItem",
+							"odata.id": "44616f80-f823-458e-b066-2390a19627f6",
+							"odata.etag": "\"1\"",
+							"odata.editLink": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)",
+							"Author@odata.navigationLinkUrl": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)/Author",
+							"Author": {
+								"odata.type": "SP.Data.UserInfoItem",
+								"odata.id": "711e7f0a-498c-4cfe-bcfb-016bd02ffe48",
+								"Title": "Denallix Administrator"
+							},
+							"Editor@odata.navigationLinkUrl": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)/Editor",
+							"Editor": {
+								"odata.type": "SP.Data.UserInfoItem",
+								"odata.id": "43fb1c72-fb73-4206-8717-3c9a0520db99",
+								"Title": "Denallix Administrator"
+							},
+							"FileSystemObjectType": 0,
+							"Id": 1,
+							"ContentTypeId": "0x010100BA4BFFA9D54DB34BB53F62688C34FDD8",
+							"Title": "Test document",
+							"ID": 1,
+							"Created": "2018-02-20T18:28:15Z",
+							"Modified": "2018-02-20T18:28:15Z",
+							"FileRef": "/sites/Sales/Shared Documents/Test document.docx",
+							"LinkFilename": "Test document.docx",
+							"ListItemEntityTypeFullName": "SP.Data.Shared_x0020_DocumentsItem"
+						}
+					}
+				}
+			}
+		},
+		"{SiteUrl}/_api/web/lists/GetByTitle('{ListTitle}')/GetItemById({ItemId})": {
+			"get": {
+				"tags": ["Sites"],
+				"description": "Get list item metadata",
+				"operationId": "GetListItemMetadata",
+				"produces": ["application/json"],
+				"parameters": [{
+						"name": "SiteUrl",
+						"in": "path",
+						"description": "Site specific portion of URL, typically same as Site Title, including managed path",
+						"required": false,
+						"type": "string",
+						"x-example": "Sales"
+					}, {
+						"name": "ListTitle",
+						"in": "path",
+						"description": "List title",
+						"required": true,
+						"type": "string",
+						"x-example": "Documents"
+					}, {
+						"name": "ItemId",
+						"in": "path",
+						"description": "Item Id",
+						"required": true,
+						"type": "string",
+						"x-example": "1"
+					}, {
+						"name": "$select",
+						"in": "query",
+						"description": "List item properties to return",
+						"required": false,
+						"type": "string",
+						"x-example": "Id,Title,FileRef,Author/Title,Created,Editor/Title,Modified,LinkFilename,FileSystemObjectType,ContentTypeId"
+					}, {
+						"name": "$expand",
+						"in": "query",
+						"description": "Associated list item properties to return",
+						"required": false,
+						"type": "string",
+						"x-example": "Author/Id,Editor/Id"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Get list item by Site URL, List Title and List Item Id",
+						"schema": {
+							"$ref": "#/definitions/GetListItemMetadata"
+						},
+						"examples": {
+							"application/json": {
+								"odata.metadata": "https://morantug.sharepoint.com/sites/Sales/_api/$metadata#SP.ListData.Shared_x0020_DocumentsItems/@Element\u0026$select=Id,Title,FileRef,Author/Title,Created,Editor/Title,Modified,LinkFilename,FileSystemObjectType,ContentTypeId",
+								"odata.type": "SP.Data.Shared_x0020_DocumentsItem",
+								"odata.id": "44616f80-f823-458e-b066-2390a19627f6",
+								"odata.etag": "\"1\"",
+								"odata.editLink": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)",
+								"Author@odata.navigationLinkUrl": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)/Author",
+								"Author": {
+									"odata.type": "SP.Data.UserInfoItem",
+									"odata.id": "711e7f0a-498c-4cfe-bcfb-016bd02ffe48",
+									"Title": "Denallix Administrator"
+								},
+								"Editor@odata.navigationLinkUrl": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)/Editor",
+								"Editor": {
+									"odata.type": "SP.Data.UserInfoItem",
+									"odata.id": "43fb1c72-fb73-4206-8717-3c9a0520db99",
+									"Title": "Denallix Administrator"
+								},
+								"FileSystemObjectType": 0,
+								"Id": 1,
+								"ContentTypeId": "0x010100BA4BFFA9D54DB34BB53F62688C34FDD8",
+								"Title": "Test document",
+								"ID": 1,
+								"Created": "2018-02-20T18:28:15Z",
+								"Modified": "2018-02-20T18:28:15Z",
+								"FileRef": "/sites/Sales/Shared Documents/Test document.docx",
+								"LinkFilename": "Test document.docx",
+								"ListItemEntityTypeFullName": "SP.Data.Shared_x0020_DocumentsItem"
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["Sites"],
+				"description": "Update list item metadata",
+				"operationId": "PostListItemMetadata",
+				"produces": ["application/json;odata=verbose"],
+				"consumes": ["application/json;odata=verbose"],
+				"parameters": [{
+						"name": "SiteUrl",
+						"in": "path",
+						"description": "Site specific portion of URL, typically same as Site Title, including managed path",
+						"required": false,
+						"type": "string",
+						"x-example": "Sales"
+					}, {
+						"name": "ListTitle",
+						"in": "path",
+						"description": "List title",
+						"required": true,
+						"type": "string",
+						"x-example": "Documents"
+					}, {
+						"name": "ItemId",
+						"in": "path",
+						"description": "Item Id",
+						"required": false,
+						"type": "string",
+						"x-example": "1"
+					}, {
+						"name": "body",
+						"in": "body",
+						"description": "List item metadata to update",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/PostListItemMetadata"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No Content"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Sites"],
+				"description": "Delete list item",
+				"operationId": "DeleteListItem",
+				"produces": ["application/json;odata=verbose"],
+				"consumes": ["application/json;odata=verbose"],
+				"parameters": [{
+						"name": "SiteUrl",
+						"in": "path",
+						"description": "Site specific portion of URL, typically same as Site Title, including managed path",
+						"required": false,
+						"type": "string",
+						"x-example": "Sales"
+					}, {
+						"name": "ListTitle",
+						"in": "path",
+						"description": "List title",
+						"required": true,
+						"type": "string",
+						"x-example": "Documents"
+					}, {
+						"name": "ItemId",
+						"in": "path",
+						"description": "Item ID",
+						"required": true,
+						"type": "string",
+						"x-example": "1"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DeleteListItem"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"CreateListItem": {
+			"x-k2-displayName": "Create List Item",
+			"description": "Model for creating list item",
+			"required": ["__metadata"],
+			"properties": {
+				"__metadata": {
+					"$ref": "#/definitions/Metadata",
+					"x-example": "{\r\n  \"type\": \"SP.Data.Shared_x0020_DocumentsItem\"\r\n}"
+				},
+				"Id": {
+					"type": "integer",
+					"format": "int32",
+					"x-example": "1"
+				},
+				"Title": {
+					"type": "string",
+					"x-example": "Test deck"
+				},
+				"FileRef": {
+					"type": "string",
+					"x-example": "/sites/petro001/Shared Documents/Test deck.pptx"
+				},
+				"Author": {
+					"$ref": "#/definitions/Author",
+					"x-example": "{\n  \"odata.type\": \"SP.Data.UserInfoItem\",\n  \"odata.id\": \"711e7f0a-498c-4cfe-bcfb-016bd02ffe48\",\n  \"Title\": \"Denallix Administrator\"\n}"
+				},
+				"Created": {
+					"type": "string",
+					"format": "date-time",
+					"x-example": "2016-07-06T22:50:36Z"
+				},
+				"Editor": {
+					"$ref": "#/definitions/Editor",
+					"x-example": "{\n  \"odata.type\": \"SP.Data.UserInfoItem\",\n  \"odata.id\": \"43fb1c72-fb73-4206-8717-3c9a0520db99\",\n  \"Title\": \"Denallix Administrator\"\n}"
+				},
+				"Modified": {
+					"type": "string",
+					"format": "date-time",
+					"x-example": "2018-02-14T23:50:41Z"
+				},
+				"LinkFilename": {
+					"type": "string",
+					"x-example": "Test deck.pptx"
+				},
+				"FileSystemObjectType": {
+					"type": "integer",
+					"format": "int32",
+					"x-example": "0"
+				},
+				"ContentTypeId": {
+					"type": "string",
+					"x-example": "0x01010065AFAFDE26846640B21FFFF9A51D9975"
+				},
+				"ListItemEntityTypeFullName": {
+					"type": "string",
+					"x-example": "SP.Data.Shared_x0020_DocumentsItem"
+				},
+				"odata.editLink": {
+					"type": "string",
+					"x-example": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)"
+				},
+				"odata.etag": {
+					"type": "string",
+					"x-example": "\"1\""
+				},
+				"odata.id": {
+					"type": "string",
+					"x-example": "44616f80-f823-458e-b066-2390a19627f6"
+				},
+				"odata.metadata": {
+					"type": "string",
+					"x-example": "https://morantug.sharepoint.com/sites/Sales/_api/$metadata#SP.ListData.Shared_x0020_DocumentsItems/@Element\u0026$select=Id,Title,FileRef,Author/Title,Created,Editor/Title,Modified,LinkFilename,FileSystemObjectType,ContentTypeId"
+				},
+				"odata.type": {
+					"type": "string",
+					"x-example": "SP.Data.Shared_x0020_DocumentsItem"
+				}
+			}
+		},
+		"GetListItemMetadata": {
+			"x-k2-displayName": "Get List Item Metadata",
+			"description": "Model for retrieving list item metadata",
+			"required": ["ID"],
+			"properties": {
+				"Id": {
+					"type": "integer",
+					"format": "int32",
+					"x-example": "1"
+				},
+				"Title": {
+					"type": "string",
+					"x-example": "Test deck"
+				},
+				"FileRef": {
+					"type": "string",
+					"x-example": "/sites/petro001/Shared Documents/Test deck.pptx"
+				},
+				"Author": {
+					"$ref": "#/definitions/Author",
+					"x-example": "{\n  \"odata.type\": \"SP.Data.UserInfoItem\",\n  \"odata.id\": \"711e7f0a-498c-4cfe-bcfb-016bd02ffe48\",\n  \"Title\": \"Denallix Administrator\"\n}"
+				},
+				"Created": {
+					"type": "string",
+					"format": "date-time",
+					"x-example": "2016-07-06T22:50:36Z"
+				},
+				"Editor": {
+					"$ref": "#/definitions/Editor",
+					"x-example": "{\n  \"odata.type\": \"SP.Data.UserInfoItem\",\n  \"odata.id\": \"43fb1c72-fb73-4206-8717-3c9a0520db99\",\n  \"Title\": \"Denallix Administrator\"\n}"
+				},
+				"Modified": {
+					"type": "string",
+					"format": "date-time",
+					"x-example": "2018-02-14T23:50:41Z"
+				},
+				"LinkFilename": {
+					"type": "string",
+					"x-example": "Test deck.pptx"
+				},
+				"FileSystemObjectType": {
+					"type": "integer",
+					"format": "int32",
+					"x-example": "0"
+				},
+				"ContentTypeId": {
+					"type": "string",
+					"x-example": "0x01010065AFAFDE26846640B21FFFF9A51D9975"
+				},
+				"ListItemEntityTypeFullName": {
+					"type": "string",
+					"x-example": "SP.Data.Shared_x0020_DocumentsItem"
+				},
+				"odata.editLink": {
+					"type": "string",
+					"x-example": "Web/Lists(guid'f45b4446-4086-49c6-b7a6-23f6e0154497')/Items(1)"
+				},
+				"odata.etag": {
+					"type": "string",
+					"x-example": "\"1\""
+				},
+				"odata.id": {
+					"type": "string",
+					"x-example": "44616f80-f823-458e-b066-2390a19627f6"
+				},
+				"odata.metadata": {
+					"type": "string",
+					"x-example": "https://morantug.sharepoint.com/sites/Sales/_api/$metadata#SP.ListData.Shared_x0020_DocumentsItems/@Element\u0026$select=Id,Title,FileRef,Author/Title,Created,Editor/Title,Modified,LinkFilename,FileSystemObjectType,ContentTypeId"
+				},
+				"odata.type": {
+					"type": "string",
+					"x-example": "SP.Data.Shared_x0020_DocumentsItem"
+				}
+			}
+		},
+		"DeleteListItem": {
+			"x-k2-displayName": "Delete List Item",
+			"description": "Model for deleting list item",
+			"required": ["HttpResponseCode"],
+			"properties": {
+				"HttpResponseCode": {
+					"type": "integer",
+					"format": "int32",
+					"x-example": "200"
+				}
+			}
+		},
+		"Author": {
+			"description": "Model for Author",
+			"required": ["odata.id"],
+			"properties": {
+				"odata.id": {
+					"type": "string",
+					"x-example": "711e7f0a-498c-4cfe-bcfb-016bd02ffe48"
+				},
+				"odata.type": {
+					"type": "string",
+					"x-example": "SP.Data.UserInfoItem"
+				},
+				"Title": {
+					"type": "string",
+					"x-example": "Denallix Administrator"
+				}
+			}
+		},
+		"Editor": {
+			"description": "Model for Editor",
+			"required": ["odata.id"],
+			"properties": {
+				"odata.id": {
+					"type": "string",
+					"x-example": "43fb1c72-fb73-4206-8717-3c9a0520db99"
+				},
+				"odata.type": {
+					"type": "string",
+					"x-example": "SP.Data.UserInfoItem"
+				},
+				"Title": {
+					"type": "string",
+					"x-example": "Denallix Administrator"
+				}
+			}
+		},
+		"PostListItemMetadata": {
+			"x-k2-displayName": "Post List Item Metadata",
+			"description": "Model for updating list item metadata",
+			"required": ["__metadata"],
+			"properties": {
+				"__metadata": {
+					"$ref": "#/definitions/Metadata",
+					"x-example": "{\r\n  \"type\": \"SP.Data.Shared_x0020_DocumentsItem\"\r\n}"
+				},
+				"Title": {
+					"type": "string"
+				}
+			}
+		},
+		"Metadata": {
+			"description": "Model for metadata, set to 	",
+			"required": ["type"],
+			"properties": {
+				"type": {
+					"type": "string",
+					"x-example": "SP.Data.Shared_x0020_DocumentsItem"
+				}
+			}
+		}
+	},
+	"tags": [{
+			"name": "Sites",
+			"description": "Operations about Sites"
+		}
+	]
+}
